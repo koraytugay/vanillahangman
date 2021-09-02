@@ -1,0 +1,24 @@
+button {
+  font-size: 20px;
+  padding: 10px;
+}
+
+.guess-letter {
+  margin: 5px;
+  width: 50px;
+  height: 50px;
+}
+
+.target-letter {
+  font-size: 50px;
+  display: inline;
+  margin: 10px;
+}
+
+#secret-word-container {
+  margin-bottom: 20px;
+}
+
+#letters-container {
+  width: 570px;
+}
