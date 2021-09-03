@@ -1,7 +1,19 @@
 export default (function hangmanGame() {
 
+  const pokemonNames = [];
+
+  function init() {
+    return fetch("https://pokeapi.co/api/v2/pokemon?limit=100")
+        .then(response => response.json())
+        .then(json => {
+          pokemonNames.push(
+              ...json['results'].flatMap(pokemon => pokemon.name)
+          );
+        });
+  }
+
   function HangmanGame() {
-    this.secretWord = "sonatype";
+    this.secretWord = pokemonNames[Math.floor(Math.random() * 100)];
     this.attempts = [];
     this.unsuccessfulAttemptCount = 0;
     this.attempt = function(letter) {
@@ -21,6 +33,7 @@ export default (function hangmanGame() {
   }
 
   return {
-    HangmanGame
+    HangmanGame,
+    init
   }
 }());

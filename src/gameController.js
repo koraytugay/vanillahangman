@@ -1,8 +1,13 @@
 import hangmanService from './hangmanService.js';
 
 (function gameController() {
-  const allowedLetters = 'abcdefghijklmnopqrstuvwxyz';
-  let hangmanGame = new hangmanService.HangmanGame();
+  const allowedLetters = 'abcdefghijklmnopqrstuvwxyz-';
+  let hangmanGame;
+
+  hangmanService.init().then(() => {
+    hangmanGame = new hangmanService.HangmanGame();
+    redraw();
+  });
 
   document.querySelector("#new-game-button").addEventListener('click', () => {
     hangmanGame = new hangmanService.HangmanGame();
@@ -10,7 +15,7 @@ import hangmanService from './hangmanService.js';
   });
 
   document.addEventListener('keydown', function({key}) {
-    if ([...allowedLetters].includes(key)) {
+    if ([...allowedLetters].includes(key) && !hangmanGame.isNoMoreAttemptsRemaining()) {
       attemptAndRedraw(key);
     }
   });
@@ -59,6 +64,4 @@ import hangmanService from './hangmanService.js';
         }
     );
   }
-
-  redraw();
 })();
