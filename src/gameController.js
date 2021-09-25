@@ -1,15 +1,10 @@
-import hangmanService from './hangmanService.js';
+import HangmanGame from './hangmanService.js';
 
-const allowedLetters = 'abcdefghijklmnopqrstuvwxyz-';
+const allowedLetters = 'abcdefghijklmnopqrstuvwxyz';
 let hangmanGame;
 
-hangmanService.init().then(() => {
-  hangmanGame = new hangmanService.HangmanGame();
-  redraw();
-});
-
 document.querySelector("#new-game-button").addEventListener('click', () => {
-  hangmanGame = new hangmanService.HangmanGame();
+  hangmanGame = new HangmanGame();
   redraw();
 });
 
@@ -63,3 +58,6 @@ function redraw() {
       }
   );
 }
+
+hangmanGame = new HangmanGame();
+redraw();

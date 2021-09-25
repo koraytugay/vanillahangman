@@ -1,13 +1,7 @@
-const pokemonNames = [];
+import words from './words.js';
 
-function init() {
-  return fetch("https://pokeapi.co/api/v2/pokemon?limit=100")
-      .then(response => response.json())
-      .then(json => pokemonNames.push(...json['results'].flatMap(pokemon => pokemon.name)));
-}
-
-function HangmanGame() {
-  this.secretWord = pokemonNames[Math.floor(Math.random() * 100)];
+export default function() {
+  this.secretWord = words[Math.floor(Math.random() * words.length)];
   this.attempts = [];
   this.unsuccessfulAttemptCount = 0;
   this.attempt = function(letter) {
@@ -24,9 +18,4 @@ function HangmanGame() {
   this.isNoMoreAttemptsRemaining = function() {
     return this.unsuccessfulAttemptCount === 10;
   }
-}
-
-export default {
-  HangmanGame,
-  init
 }
